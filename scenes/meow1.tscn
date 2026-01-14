@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnlfoljmadie5"]
+
+[ext_resource type="AudioStream" uid="uid://ceuo3fy4l2vgm" path="res://assets/meow1.wav" id="1_g40wj"]
+
+[node name="meow1" type="AudioStreamPlayer"]
+stream = ExtResource("1_g40wj")

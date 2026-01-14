@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3svx45nfwity"]
+
+[ext_resource type="Script" uid="uid://dlcyem62arvcm" path="res://scripts/start_menu.gd" id="1_m7x51"]
+[ext_resource type="Texture2D" uid="uid://cnm1603webnid" path="res://assets/start-menu.png" id="1_thu50"]
+[ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="3_h61rw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7x51"]
+size = Vector2(173, 205)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h61rw"]
+size = Vector2(84.25, 148)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcv5n"]
+size = Vector2(65, 148)
+
+[node name="start-menu" type="Node2D"]
+script = ExtResource("1_m7x51")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("1_thu50")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 28.0
+offset_top = 530.0
+offset_right = 372.0
+offset_bottom = 626.0
+theme = ExtResource("3_h61rw")
+text = "START"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(490.5, 545.5)
+shape = SubResource("RectangleShape2D_m7x51")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(642, 570)
+shape = SubResource("RectangleShape2D_h61rw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(773.125, 574)
+shape = SubResource("RectangleShape2D_h61rw")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(889, 574)
+shape = SubResource("RectangleShape2D_h61rw")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(985, 574)
+shape = SubResource("RectangleShape2D_fcv5n")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1083, 574)
+shape = SubResource("RectangleShape2D_h61rw")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

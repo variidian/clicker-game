@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bodvmfg5g7y4n"]
+
+[ext_resource type="FontFile" uid="uid://2efnrspn5xjr" path="res://assets/kirifont/KiriFont.ttf" id="1_5x3i2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x3i2"]
+bg_color = Color(0.08666701, 0.44474575, 0.6760866, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.9607843, 0.93333334, 0.70980394, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h61rw"]
+bg_color = Color(0.19215687, 0.6, 0.88235295, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.9607843, 0.93333334, 0.70980394, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wl1kw"]
+bg_color = Color(0.19215687, 0.6, 0.88235295, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.9607843, 0.93333334, 0.70980394, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[resource]
+Button/colors/font_color = Color(0.9607843, 0.93333334, 0.70980394, 1)
+Button/constants/icon_max_width = 0
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_5x3i2")
+Button/styles/hover = SubResource("StyleBoxFlat_5x3i2")
+Button/styles/normal = SubResource("StyleBoxFlat_h61rw")
+Button/styles/pressed = SubResource("StyleBoxFlat_wl1kw")
