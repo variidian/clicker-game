@@ -41,8 +41,11 @@ corner_radius_bottom_left = 10
 [resource]
 Button/colors/font_color = Color(0.9607843, 0.93333334, 0.70980394, 1)
 Button/constants/icon_max_width = 0
-Button/font_sizes/font_size = 30
+Button/font_sizes/font_size = 22
 Button/fonts/font = ExtResource("1_5x3i2")
 Button/styles/hover = SubResource("StyleBoxFlat_5x3i2")
 Button/styles/normal = SubResource("StyleBoxFlat_h61rw")
 Button/styles/pressed = SubResource("StyleBoxFlat_wl1kw")
+Label/colors/font_color = Color(0.19215687, 0.6, 0.88235295, 1)
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("1_5x3i2")

@@ -1,3 +1,147 @@
-[gd_scene format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=11 format=3 uid="uid://1dv6ilarv55s"]
+
+[ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
+[ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
+[ext_resource type="Texture2D" uid="uid://bbm8ihna3gjks" path="res://assets/blobcat1.png" id="3_7ykc4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
+bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ykc4"]
+bg_color = Color(0.19215687, 0.6, 0.88235295, 1)
+border_width_top = 30
+border_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pu3yx"]
+bg_color = Color(0.048721537, 0.3282728, 0.50703, 1)
+border_width_left = 15
+border_color = Color(0.021848112, 0.21956176, 0.34773603, 1)
+
+[sub_resource type="Animation" id="Animation_pu3yx"]
+resource_name = "blobcat1_entry"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.66, 1.46, 2.25, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-168, 445), Vector2(39, 493), Vector2(162, 388), Vector2(224, 444), Vector2(197, 450.99997)]
+}
+
+[sub_resource type="Animation" id="Animation_gubc5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-168, 445)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rt2n2"]
+_data = {
+&"RESET": SubResource("Animation_gubc5"),
+&"blobcat1_entry": SubResource("Animation_pu3yx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ykc4"]
+size = Vector2(809, 435)
 
 [node name="main_scene" type="Node2D"]
+script = ExtResource("1_pw63i")
+
+[node name="bg" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_pw63i")
+
+[node name="water" type="Panel" parent="."]
+offset_top = 420.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ykc4")
+
+[node name="shop" type="Panel" parent="."]
+offset_left = 833.0
+offset_top = -1.0
+offset_right = 1152.0
+offset_bottom = 649.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pu3yx")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 859.0
+offset_top = 16.0
+offset_right = 1140.0
+offset_bottom = 639.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+1 feed/click"
+
+[node name="Button2" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+10  feed/click"
+
+[node name="Button3" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "Blob cat 1"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 12.0
+offset_right = 362.0
+offset_bottom = 85.0
+theme = ExtResource("1_w2twt")
+text = "CAT FEED: 0"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-168, 445)
+scale = Vector2(0.64673907, 0.666)
+texture = ExtResource("3_7ykc4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rt2n2")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(419.5, 218)
+shape = SubResource("RectangleShape2D_7ykc4")
+
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
