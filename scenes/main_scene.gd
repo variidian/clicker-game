@@ -11,7 +11,14 @@ extends Node2D
 @onready var blobcat2_bought := false
 @onready var catfeed_animation = $cat_feed_animation
 @onready var blobcat2_animation = $blobcat2_animation
-var can_click := false
+@onready var autoclick = $ScrollContainer/VBoxContainer/autoclick_purchase
+@onready var autoclick_timer = $autoclick_timer
+@onready var autoclicker = 0
+@onready var feeding_text = $Label2
+@onready var can_click := false
+@onready var tutorial = $tutorial
+func _ready():
+	feeding_text.hide()
 func _on_button_mouse_entered() -> void: #show price on hover
 	button.text = 'COST: 10  feed'
 func _on_button_mouse_exited() -> void:  #remove price after hover
@@ -56,6 +63,8 @@ func _on_button_3_pressed() -> void: #blob cat (purchase)
 	if clicky >= 400 and not blobcat1_bought:
 		clicky -= 400
 		animation.play("blobcat1_entry")
+		feeding_text.show()
+		tutorial.play("blobcat_feeding")
 		random_meow()
 		blobcat1_bought = true
 
@@ -104,3 +113,20 @@ func _on_blobcat_2_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "blobcat2_entry":
 		blobcat2_animation.play("blobcat2_move")
 		print("blobcat2 entry finished - starting movement")
+
+
+func _on_autoclick_purchase_pressed() -> void:
+	if clicky >= 99:
+		if autoclicker == 0:
+			autoclick_timer.start()
+		clicky -= 99
+		autoclicker += 1
+
+func _on_autoclick_purchase_mouse_entered() -> void:
+	autoclick.text = "COST: 99  feed"
+func _on_autoclick_purchase_mouse_exited() -> void:
+	autoclick.text = "+1/sec auto click"
+
+func _on_autoclick_timer_timeout() -> void:
+	clicky += autoclicker
+	click.play()

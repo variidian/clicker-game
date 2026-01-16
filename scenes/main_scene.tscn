@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=25 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -123,6 +123,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ykc4"]
 size = Vector2(190, 225)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gubc5"]
+size = Vector2(143.39769, 263.18066)
+
 [sub_resource type="Animation" id="Animation_rt2n2"]
 resource_name = "catfeed"
 length = 0.5
@@ -183,6 +186,67 @@ _data = {
 &"blobcat2_move": SubResource("Animation_c1pb6")
 }
 
+[sub_resource type="Animation" id="Animation_6wevv"]
+resource_name = "blobcat_feeding"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label2:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 6.2, 7.9333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2666667, 4.766667, 7.9666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_e1cbu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label2:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mngbo"]
+_data = {
+&"RESET": SubResource("Animation_e1cbu"),
+&"blobcat_feeding": SubResource("Animation_6wevv")
+}
+
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_pw63i")
 
@@ -214,6 +278,13 @@ offset_bottom = 639.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+
+[node name="autoclick_purchase" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+1/sec auto click"
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(280, 50)
@@ -283,6 +354,12 @@ position = Vector2(80, 464.99997)
 scale = Vector2(0.83816427, 0.786)
 texture = ExtResource("5_gubc5")
 
+[node name="meow2d" type="Area2D" parent="blobcat2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blobcat2/meow2d"]
+position = Vector2(-310.20172, 77.60815)
+shape = SubResource("RectangleShape2D_gubc5")
+
 [node name="cat_feed_animation" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_c16ls")
@@ -293,6 +370,38 @@ libraries = {
 &"": SubResource("AnimationLibrary_6wevv")
 }
 
+[node name="autoclick_timer" type="Timer" parent="."]
+
+[node name="tutorial" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mngbo")
+}
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 539.0
+offset_top = 16.0
+offset_right = 825.0
+offset_bottom = 332.0
+theme = ExtResource("1_w2twt")
+theme_override_font_sizes/font_size = 25
+text = "your blob cats 
+will need to be
+fed cat feed
+with the option
+in the shop.
+Beware that if 
+you don't feed
+them often
+they'll disappear
+and not come 
+back. "
+visible_characters = 0
+visible_ratio = 0.0
+
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_pressed"]
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
@@ -309,4 +418,6 @@ libraries = {
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="blobcat2/meow2d" to="." method="_on_meow_2d_mouse_entered"]
 [connection signal="animation_finished" from="blobcat2_animation" to="." method="_on_blobcat_2_animation_animation_finished"]
+[connection signal="timeout" from="autoclick_timer" to="." method="_on_autoclick_timer_timeout"]
