@@ -1,6 +1,7 @@
 extends Node2D
-
-
+@onready var animation = $AnimationPlayer
+func _ready():
+	animation.play("logo")
 func _on_button_pressed() -> void: #start game button
 	click.play()
 	get_tree().change_scene_to_file("res://scenes/main_scene.tscn")
