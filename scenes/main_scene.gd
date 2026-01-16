@@ -17,8 +17,16 @@ extends Node2D
 @onready var feeding_text = $Label2
 @onready var can_click := false
 @onready var tutorial = $tutorial
+@onready var in_frenzy := false
+@onready var frenzy_anim = $frenzy_animation
+@onready var frenzy_multiplier = 1
+@onready var frenzy_sprite = $frenzy
+@onready var frenzy_sprite2 = $frenzy1
+@onready var frenzy_timer = $frenzy_timer
 func _ready():
 	feeding_text.hide()
+	frenzy_sprite.hide()
+	frenzy_sprite2.hide()
 func _on_button_mouse_entered() -> void: #show price on hover
 	button.text = 'COST: 10  feed'
 func _on_button_mouse_exited() -> void:  #remove price after hover
@@ -41,9 +49,10 @@ func _process(delta: float) -> void:
 	cat_feed_count.text = "CAT FEED: " + str(clicky)
 	if can_click:
 		if Input.is_action_just_pressed("click"): 
-			clicky += int(1) + int(additional_clicks)
+			clicky += (int(1) + int(additional_clicks)) * frenzy_multiplier
 			catfeed_animation.play("catfeed")
 			click.play()
+			chance_for_frenzy()
 
 
 
@@ -77,6 +86,18 @@ func random_meow():
 		meow1.play()
 	if random_float >= 0.67:
 		meow2.play()
+func chance_for_frenzy():
+	var random_float = randf()
+	randomize()
+	if random_float <= 0.01:
+		do_frenzy()
+		in_frenzy = true
+func do_frenzy():
+	frenzy_anim.play("frenzy")
+	frenzy_multiplier = 2
+	frenzy_sprite.show()
+	frenzy_sprite2.show()
+	frenzy_timer.start()
 
 func _on_area_2d_mouse_entered() -> void:
 	can_click = true
@@ -96,14 +117,14 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_button_4_mouse_entered() -> void:
 	if not blobcat2_bought:
-			button4.text = "COST: 1999  feed"
+			button4.text = "COST: 9999  feed"
 	else:
 		button4.text = "BOUGHT"
 func _on_button_4_mouse_exited() -> void:
 	button4.text = "Blob cat 2"
 func _on_button_4_pressed() -> void:
-	if clicky >= 1999 and not blobcat2_bought:
-		clicky -= 1999
+	if clicky >= 9999 and not blobcat2_bought:
+		clicky -= 9999
 		blobcat2_animation.play("blobcat2_entry")
 		random_meow()
 		blobcat2_bought = true
@@ -130,3 +151,6 @@ func _on_autoclick_purchase_mouse_exited() -> void:
 func _on_autoclick_timer_timeout() -> void:
 	clicky += autoclicker
 	click.play()
+
+func _on_frenzy_timer_timeout() -> void:
+	frenzy_multiplier = 1

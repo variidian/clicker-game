@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3svx45nfwity"]
+[gd_scene load_steps=12 format=3 uid="uid://b3svx45nfwity"]
 
 [ext_resource type="Script" uid="uid://dlcyem62arvcm" path="res://scripts/start_menu.gd" id="1_m7x51"]
 [ext_resource type="Texture2D" uid="uid://cfap0625sygdj" path="res://assets/bg_menu.png" id="2_h61rw"]
@@ -13,35 +13,6 @@ size = Vector2(84.25, 148)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fcv5n"]
 size = Vector2(65, 148)
-
-[sub_resource type="Animation" id="Animation_4v6gu"]
-resource_name = "logo"
-length = 16.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 6.1, 8.9, 14.933333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 0.9814816), Vector2(0.9, 0.9), Vector2(0.9, 0.9), Vector2(1.1, 1.1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 6.1666665, 8.9, 14.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.13962634015954636, 0.13962634015954636, -0.08212806]
-}
 
 [sub_resource type="Animation" id="Animation_nxjfj"]
 length = 0.001
@@ -70,11 +41,43 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_4v6gu"]
+resource_name = "logo"
+length = 0.67
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.43333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.9814816), Vector2(0.9, 0.9), Vector2(0.9, 0.9), Vector2(1.1, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.46666667, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.13962634015954636, 0.13962634015954636, -0.08212806]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u4qax"]
 _data = {
 &"RESET": SubResource("Animation_nxjfj"),
 &"logo": SubResource("Animation_4v6gu")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h61rw"]
+radius = 220.0
+height = 814.0
 
 [node name="start-menu" type="Node2D"]
 script = ExtResource("1_m7x51")
@@ -128,5 +131,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_u4qax")
 }
 
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+position = Vector2(590, 201.99997)
+rotation = 1.5773876
+shape = SubResource("CapsuleShape2D_h61rw")
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_entered" from="Area2D2" to="." method="_on_area_2d_2_mouse_entered"]
