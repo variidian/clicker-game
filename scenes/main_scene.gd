@@ -30,11 +30,17 @@ extends Node2D
 @onready var munch_sound = $munch
 @onready var eating_label = $eating_label
 @onready var eating_animation = $eating
+@onready var game_end_animation = $game_end
+@onready var game_end_text = $game_end_text
+@onready var game_end_bg = $game_end_bg
+@onready var game_ended := false
 func _ready():
 	feeding_text.hide()
 	frenzy_sprite.hide()
 	frenzy_sprite2.hide()
 	eating_label.hide()
+	game_end_bg.hide()
+	game_end_text.hide()
 func _on_button_mouse_entered() -> void: #show price on hover
 	button.text = 'COST: 10  feed'
 func _on_button_mouse_exited() -> void:  #remove price after hover
@@ -47,7 +53,7 @@ func _on_button_2_mouse_exited() -> void:
 
 func _on_button_3_mouse_entered() -> void:
 	if not blobcat1_bought:
-		button3.text = "COST: 40 0  feed"
+		button3.text = "COST: 500 0  feed"
 	else:
 		button3.text = "BOUGHT"
 func _on_button_3_mouse_exited() -> void:
@@ -64,6 +70,11 @@ func _process(delta: float) -> void:
 	if blobcat_amount >= 1 and not started_feeding:
 		started_feeding = true
 		feeding_blobcat_timer.start()
+	if not game_ended and clicky <= -10000:
+		game_end_animation.play("game_end")
+		game_end_bg.show()
+		game_end_text.show()
+		game_ended = true
 
 
 
@@ -80,8 +91,8 @@ func _on_button_2_pressed() -> void: #button2 (purchase)
 
 
 func _on_button_3_pressed() -> void: #blob cat (purchase)
-	if clicky >= 400 and not blobcat1_bought:
-		clicky -= 400
+	if clicky >= 5000 and not blobcat1_bought:
+		clicky -= 5000
 		animation.play("blobcat1_entry")
 		feeding_text.show()
 		tutorial.play("blobcat_feeding")
@@ -171,7 +182,7 @@ func _on_frenzy_timer_timeout() -> void:
 
 
 func _on_feeding_blobcat_timeout() -> void:
-	clicky -= 2500 * blobcat_amount
+	clicky -= 6700 * blobcat_amount # :3 ~ six sevennn
 	munch_sound.play()
 	eating_animation.play("eating")
 	eating_label.show()
