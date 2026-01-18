@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=36 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bevwgiiego0cs" path="res://assets/nzy.png" id="7_18nlu"]
 [ext_resource type="Texture2D" uid="uid://dkrf2k6jfclp" path="res://assets/New Drawing.png" id="8_18nlu"]
 [ext_resource type="AudioStream" uid="uid://c5ljhkdqhsg80" path="res://assets/757104__solarpsychedelic__rapid-fuzz-arpeggio.wav" id="9_c1pb6"]
+[ext_resource type="AudioStream" uid="uid://cknrriclnvyiv" path="res://assets/646849__konstati__crunch_munch.wav" id="10_6wevv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
 bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
@@ -408,6 +409,43 @@ _data = {
 &"frenzy": SubResource("Animation_mngbo")
 }
 
+[sub_resource type="Animation" id="Animation_r6p65"]
+resource_name = "eating"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eating_label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.1650918, 4.701364, 6.8333335),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_si52b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eating_label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_01n6w"]
+_data = {
+&"RESET": SubResource("Animation_si52b"),
+&"eating": SubResource("Animation_r6p65")
+}
+
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_pw63i")
 
@@ -588,6 +626,30 @@ texture = ExtResource("8_18nlu")
 stream = ExtResource("9_c1pb6")
 volume_db = -13.358
 
+[node name="feeding_blobcat" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="munch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_6wevv")
+
+[node name="eating_label" type="Label" parent="."]
+offset_left = 19.0
+offset_top = 55.0
+offset_right = 199.0
+offset_bottom = 235.0
+theme = ExtResource("1_w2twt")
+text = "blobcats
+ate some
+of your
+feed"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="eating" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_01n6w")
+}
+
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_pressed"]
@@ -611,3 +673,4 @@ volume_db = -13.358
 [connection signal="animation_finished" from="blobcat2_animation" to="." method="_on_blobcat_2_animation_animation_finished"]
 [connection signal="timeout" from="autoclick_timer" to="." method="_on_autoclick_timer_timeout"]
 [connection signal="timeout" from="frenzy_timer" to="." method="_on_frenzy_timer_timeout"]
+[connection signal="timeout" from="feeding_blobcat" to="." method="_on_feeding_blobcat_timeout"]
