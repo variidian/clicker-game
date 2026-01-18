@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=32 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bgpngeaoshuw5" path="res://assets/blobcat2.png" id="5_gubc5"]
 [ext_resource type="Texture2D" uid="uid://bbr7utiwrid6n" path="res://assets/fre.png" id="6_c16ls"]
 [ext_resource type="Texture2D" uid="uid://bevwgiiego0cs" path="res://assets/nzy.png" id="7_18nlu"]
+[ext_resource type="Texture2D" uid="uid://dkrf2k6jfclp" path="res://assets/New Drawing.png" id="8_18nlu"]
+[ext_resource type="AudioStream" uid="uid://c5ljhkdqhsg80" path="res://assets/757104__solarpsychedelic__rapid-fuzz-arpeggio.wav" id="9_c1pb6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
 bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
@@ -249,58 +251,6 @@ _data = {
 &"blobcat_feeding": SubResource("Animation_6wevv")
 }
 
-[sub_resource type="Animation" id="Animation_mngbo"]
-resource_name = "frenzy"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("frenzy:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.56666666, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(420, 540), Vector2(425, 351), Vector2(420, 540)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("frenzy1:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.53333336, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(431, 62), Vector2(438, 345), Vector2(431, 62)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("frenzy:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("frenzy1:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_4w45t"]
 length = 0.001
 tracks/0/type = "value"
@@ -350,6 +300,106 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("frenzy2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("frenzy2:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.6255208, 0.6787037)]
+}
+
+[sub_resource type="Animation" id="Animation_mngbo"]
+resource_name = "frenzy"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("frenzy:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.56666666, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(420, 540), Vector2(425, 351), Vector2(420, 540)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("frenzy1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.53333336, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(431, 62), Vector2(438, 345), Vector2(431, 62)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("frenzy:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("frenzy1:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("frenzy2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.66666675, 1.2666667, 1.8333334, 2.7333333, 3.6666667, 4.233333, 4.866667, 5.4333334, 5.9666667, 6.6, 7.233333, 7.733333, 8.4, 8.933333, 9.5, 9.966666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5529412), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3882353), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3372549), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3372549), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3372549), Color(1, 1, 1, 0.3372549), Color(1, 1, 1, 1), Color(1, 1, 1, 0.5529412), Color(1, 1, 1, 1), Color(1, 1, 1, 0.3372549), Color(1, 1, 1, 0.3372549), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("frenzy2:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.0666666, 4.2, 5.766667, 7, 8.8, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6255208, 0.6787037), Vector2(0.66875, 0.74259263), Vector2(0.70520836, 0.7537037), Vector2(0.66354173, 0.76574075), Vector2(0.6000001, 0.674537), Vector2(0.6770834, 0.63425934), Vector2(0.72447914, 0.87407404)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4w45t"]
@@ -525,8 +575,18 @@ position = Vector2(431, 62)
 texture = ExtResource("7_18nlu")
 
 [node name="frenzy_timer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 10.0
 one_shot = true
+
+[node name="frenzy2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(571, 338)
+scale = Vector2(0.6255208, 0.6787037)
+texture = ExtResource("8_18nlu")
+
+[node name="frenzy_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_c1pb6")
+volume_db = -13.358
 
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]

@@ -23,6 +23,7 @@ extends Node2D
 @onready var frenzy_sprite = $frenzy
 @onready var frenzy_sprite2 = $frenzy1
 @onready var frenzy_timer = $frenzy_timer
+@onready var frenzy_sound = $frenzy_sound
 func _ready():
 	feeding_text.hide()
 	frenzy_sprite.hide()
@@ -98,6 +99,7 @@ func do_frenzy():
 	frenzy_sprite.show()
 	frenzy_sprite2.show()
 	frenzy_timer.start()
+	frenzy_sound.play()
 
 func _on_area_2d_mouse_entered() -> void:
 	can_click = true

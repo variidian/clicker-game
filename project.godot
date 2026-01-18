@@ -21,6 +21,7 @@ click="*res://scenes/button_click.tscn"
 meow="*res://scenes/meow.tscn"
 meow1="*res://scenes/meow1.tscn"
 meow2="*res://scenes/meow2.tscn"
+BgMusic="*res://scenes/bg_music.tscn"
 
 [editor_plugins]
 
