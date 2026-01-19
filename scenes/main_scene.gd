@@ -34,6 +34,12 @@ extends Node2D
 @onready var game_end_text = $game_end_text
 @onready var game_end_bg = $game_end_bg
 @onready var game_ended := false
+@onready var button5 = $ScrollContainer/VBoxContainer/Button5
+@onready var blobcat3_bought := false
+@onready var blobcat4_bought := false
+@onready var blobcat5_bought := false
+@onready var blobcat3_animation = $blobcat3
+@onready var button6 = $ScrollContainer/VBoxContainer/Button6
 func _ready():
 	feeding_text.hide()
 	frenzy_sprite.hide()
@@ -53,7 +59,7 @@ func _on_button_2_mouse_exited() -> void:
 
 func _on_button_3_mouse_entered() -> void:
 	if not blobcat1_bought:
-		button3.text = "COST: 500 0  feed"
+		button3.text = "COST: 50 0 0  feed"
 	else:
 		button3.text = "BOUGHT"
 func _on_button_3_mouse_exited() -> void:
@@ -152,7 +158,7 @@ func _on_button_4_pressed() -> void:          #blobcat purchase
 		blobcat2_animation.play("blobcat2_entry")
 		random_meow()
 		blobcat2_bought = true
-		blobcat_amount += 1
+		blobcat_amount += 2
 
 
 func _on_blobcat_2_animation_animation_finished(anim_name: StringName) -> void:
@@ -182,7 +188,39 @@ func _on_frenzy_timer_timeout() -> void:
 
 
 func _on_feeding_blobcat_timeout() -> void:
-	clicky -= 6700 * blobcat_amount # :3 ~ six sevennn
+	clicky -= 6700 * blobcat_amount # :3
 	munch_sound.play()
 	eating_animation.play("eating")
 	eating_label.show()
+
+
+func _on_button_5_pressed() -> void:
+		if clicky >= 999:
+			additional_clicks += 100
+			clicky -= 999
+
+func _on_button_5_mouse_entered() -> void:
+	button5.text = "COST: 999 feed"
+func _on_button_5_mouse_exited() -> void:
+	button5.text = "+10 0  feed/click"
+
+
+func _on_button_6_pressed() -> void:
+	if clicky >= 15000 and not blobcat3_bought:
+		clicky -= 15000
+		blobcat3_animation.play("entry")
+		random_meow()
+		blobcat3_bought = true
+		blobcat_amount += 2
+
+func _on_button_6_mouse_entered() -> void:
+	button6.text = "COST: 150 0 0 feed"
+
+
+func _on_button_6_mouse_exited() -> void:
+	button6.text = "Blob cat 3"
+
+
+func _on_blobcat_3_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "entry":
+		blobcat3_animation.play("loop")

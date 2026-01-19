@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=45 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dkrf2k6jfclp" path="res://assets/New Drawing.png" id="8_18nlu"]
 [ext_resource type="AudioStream" uid="uid://c5ljhkdqhsg80" path="res://assets/757104__solarpsychedelic__rapid-fuzz-arpeggio.wav" id="9_c1pb6"]
 [ext_resource type="AudioStream" uid="uid://cknrriclnvyiv" path="res://assets/646849__konstati__crunch_munch.wav" id="10_6wevv"]
+[ext_resource type="Texture2D" uid="uid://d3nbwwha1lb4n" path="res://assets/blobcat3.png" id="11_e1cbu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
 bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
@@ -409,6 +410,21 @@ _data = {
 &"frenzy": SubResource("Animation_mngbo")
 }
 
+[sub_resource type="Animation" id="Animation_si52b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("eating_label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_r6p65"]
 resource_name = "eating"
 length = 7.0
@@ -425,25 +441,49 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_si52b"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_01n6w"]
+_data = {
+&"RESET": SubResource("Animation_si52b"),
+&"eating": SubResource("Animation_r6p65")
+}
+
+[sub_resource type="Animation" id="Animation_6u1mn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("eating_label:visible_ratio")
+tracks/0/path = NodePath("game_end_bg:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("game_end_text:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [0.0]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_01n6w"]
-_data = {
-&"RESET": SubResource("Animation_si52b"),
-&"eating": SubResource("Animation_r6p65")
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("game_end_text:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_01n6w"]
@@ -486,50 +526,69 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_6u1mn"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcnxi"]
+_data = {
+&"RESET": SubResource("Animation_6u1mn"),
+&"game_end": SubResource("Animation_01n6w")
+}
+
+[sub_resource type="Animation" id="Animation_bcnxi"]
+resource_name = "entry"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blobcat3_:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.0333333, 1.74, 2.72, 3.7, 4.2, 4.69, 5.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-473, 683), Vector2(-18, 536), Vector2(-18, 536), Vector2(31, 613), Vector2(127, 612), Vector2(127, 612), Vector2(95, 650), Vector2(192, 659)]
+}
+
+[sub_resource type="Animation" id="Animation_7nt27"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("game_end_bg:modulate")
+tracks/0/path = NodePath("blobcat3_:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("game_end_text:visible_ratio")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("game_end_text:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Vector2(-473, 683)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bcnxi"]
-_data = {
-&"RESET": SubResource("Animation_6u1mn"),
-&"game_end": SubResource("Animation_01n6w")
+[sub_resource type="Animation" id="Animation_k6f3i"]
+resource_name = "loop"
+length = 15.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blobcat3_:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2771423, 2.2396264, 4.9, 5.8489413, 6.6666665, 8.199623, 8.870894, 10.240583, 11.566667, 12.8, 14.066667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(192, 659), Vector2(104, 637), Vector2(104, 637), Vector2(205, 563), Vector2(205, 563), Vector2(139, 557), Vector2(79, 626), Vector2(231, 634), Vector2(324, 592), Vector2(436, 565), Vector2(436, 565), Vector2(538, 665)]
 }
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7nt27"]
+_data = {
+&"RESET": SubResource("Animation_7nt27"),
+&"entry": SubResource("Animation_bcnxi"),
+&"loop": SubResource("Animation_k6f3i")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6f3i"]
+size = Vector2(131.5, 152)
 
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_pw63i")
@@ -584,6 +643,13 @@ size_flags_vertical = 2
 theme = ExtResource("1_w2twt")
 text = "+10  feed/click"
 
+[node name="Button5" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+10 0  feed/click"
+
 [node name="Button3" type="Button" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(280, 50)
 layout_mode = 2
@@ -597,6 +663,13 @@ layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("1_w2twt")
 text = "Blob cat 2"
+
+[node name="Button6" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "Blob cat 3"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 4.0
@@ -733,6 +806,7 @@ libraries = {
 }
 
 [node name="game_end_bg" type="ColorRect" parent="."]
+visible = false
 offset_right = 1179.0
 offset_bottom = 666.0
 color = Color(0, 0, 0, 1)
@@ -753,6 +827,22 @@ libraries = {
 &"": SubResource("AnimationLibrary_bcnxi")
 }
 
+[node name="blobcat3" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7nt27")
+}
+
+[node name="blobcat3_" type="Sprite2D" parent="."]
+position = Vector2(-473, 683)
+texture = ExtResource("11_e1cbu")
+
+[node name="Area2D" type="Area2D" parent="blobcat3_"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blobcat3_/Area2D"]
+visible = false
+position = Vector2(110, -110)
+shape = SubResource("RectangleShape2D_k6f3i")
+
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_pressed"]
@@ -762,12 +852,18 @@ libraries = {
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button2" to="." method="_on_button_2_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button5" to="." method="_on_button_5_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button5" to="." method="_on_button_5_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button4" to="." method="_on_button_4_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button4" to="." method="_on_button_4_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button6" to="." method="_on_button_6_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button6" to="." method="_on_button_6_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button6" to="." method="_on_button_6_pressed"]
 [connection signal="mouse_entered" from="blobcat1/meow2d" to="." method="_on_meow_2d_mouse_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
@@ -777,3 +873,4 @@ libraries = {
 [connection signal="timeout" from="autoclick_timer" to="." method="_on_autoclick_timer_timeout"]
 [connection signal="timeout" from="frenzy_timer" to="." method="_on_frenzy_timer_timeout"]
 [connection signal="timeout" from="feeding_blobcat" to="." method="_on_feeding_blobcat_timeout"]
+[connection signal="animation_finished" from="blobcat3" to="." method="_on_blobcat_3_animation_finished"]
