@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=51 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c5ljhkdqhsg80" path="res://assets/757104__solarpsychedelic__rapid-fuzz-arpeggio.wav" id="9_c1pb6"]
 [ext_resource type="AudioStream" uid="uid://cknrriclnvyiv" path="res://assets/646849__konstati__crunch_munch.wav" id="10_6wevv"]
 [ext_resource type="Texture2D" uid="uid://d3nbwwha1lb4n" path="res://assets/blobcat3.png" id="11_e1cbu"]
+[ext_resource type="Texture2D" uid="uid://bmsl220sxaj3" path="res://assets/blobcat4.png" id="12_mngbo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
 bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
@@ -427,7 +428,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_r6p65"]
 resource_name = "eating"
-length = 7.0
+length = 3.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -435,7 +436,7 @@ tracks/0/path = NodePath("eating_label:visible_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3.1650918, 4.701364, 6.8333335),
+"times": PackedFloat32Array(0, 1.0666667, 2.5333333, 3.1333334),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 1.0, 1.0, 0.0]
@@ -590,6 +591,64 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6f3i"]
 size = Vector2(131.5, 152)
 
+[sub_resource type="Animation" id="Animation_xdqt8"]
+resource_name = "entry"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.98, 2.7, 3.21, 4.0666666, 4.51, 5.25, 5.78),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-344, 866), Vector2(-148, 728), Vector2(-148, 728), Vector2(-179, 699), Vector2(-29, 743), Vector2(52, 703), Vector2(54, 647), Vector2(54, 647)]
+}
+
+[sub_resource type="Animation" id="Animation_adb74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-344, 866)]
+}
+
+[sub_resource type="Animation" id="Animation_58gk3"]
+resource_name = "loop"
+length = 13.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.82568014, 1.5490636, 2.1666667, 3.1, 3.6899865, 4.3333335, 5.0666666, 5.4333334, 6.0666666, 7.4333334, 8.466666, 9, 9.930732, 11.366667, 12.640272),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(54, 647), Vector2(103, 676), Vector2(69, 675), Vector2(-14, 679), Vector2(-14, 679), Vector2(171, 680), Vector2(150, 630), Vector2(12, 680), Vector2(-65, 689), Vector2(-88, 616), Vector2(-88, 616), Vector2(-124, 680), Vector2(-130, 620), Vector2(-13, 587), Vector2(108, 567), Vector2(108, 567)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_to7gp"]
+_data = {
+&"RESET": SubResource("Animation_adb74"),
+&"entry": SubResource("Animation_xdqt8"),
+&"loop": SubResource("Animation_58gk3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w45t"]
+size = Vector2(190, 180.5)
+
 [node name="main_scene" type="Node2D"]
 script = ExtResource("1_pw63i")
 
@@ -670,6 +729,13 @@ layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("1_w2twt")
 text = "Blob cat 3"
+
+[node name="Button7" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "Blob cat 4"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 4.0
@@ -782,7 +848,7 @@ stream = ExtResource("9_c1pb6")
 volume_db = -13.358
 
 [node name="feeding_blobcat" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 7.0
 
 [node name="munch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_6wevv")
@@ -805,23 +871,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_01n6w")
 }
 
-[node name="game_end_bg" type="ColorRect" parent="."]
-visible = false
-offset_right = 1179.0
-offset_bottom = 666.0
-color = Color(0, 0, 0, 1)
-
-[node name="game_end_text" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = 244.0
-offset_top = 279.0
-offset_right = 931.0
-offset_bottom = 474.0
-theme = ExtResource("1_w2twt")
-text = "game end: you went too broke  :3 "
-visible_characters = 0
-visible_ratio = 0.0
-
 [node name="game_end" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_bcnxi")
@@ -839,9 +888,40 @@ texture = ExtResource("11_e1cbu")
 [node name="Area2D" type="Area2D" parent="blobcat3_"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blobcat3_/Area2D"]
-visible = false
 position = Vector2(110, -110)
 shape = SubResource("RectangleShape2D_k6f3i")
+
+[node name="blobcat4" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_to7gp")
+}
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-344, 866)
+texture = ExtResource("12_mngbo")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/Area2D"]
+position = Vector2(281, -148.25)
+shape = SubResource("RectangleShape2D_4w45t")
+
+[node name="game_end_bg" type="ColorRect" parent="."]
+visible = false
+offset_right = 1179.0
+offset_bottom = 666.0
+color = Color(0, 0, 0, 1)
+
+[node name="game_end_text" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 244.0
+offset_top = 279.0
+offset_right = 931.0
+offset_bottom = 474.0
+theme = ExtResource("1_w2twt")
+text = "game end: you went too broke  :3 "
+visible_characters = 0
+visible_ratio = 0.0
 
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]
@@ -864,6 +944,9 @@ shape = SubResource("RectangleShape2D_k6f3i")
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button6" to="." method="_on_button_6_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button6" to="." method="_on_button_6_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button7" to="." method="_on_button_7_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button7" to="." method="_on_button_7_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button7" to="." method="_on_button_7_pressed"]
 [connection signal="mouse_entered" from="blobcat1/meow2d" to="." method="_on_meow_2d_mouse_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

@@ -40,6 +40,9 @@ extends Node2D
 @onready var blobcat5_bought := false
 @onready var blobcat3_animation = $blobcat3
 @onready var button6 = $ScrollContainer/VBoxContainer/Button6
+@onready var blobcat4_animation = $blobcat4
+@onready var button7 = $ScrollContainer/VBoxContainer/Button7
+
 func _ready():
 	feeding_text.hide()
 	frenzy_sprite.hide()
@@ -224,3 +227,18 @@ func _on_button_6_mouse_exited() -> void:
 func _on_blobcat_3_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "entry":
 		blobcat3_animation.play("loop")
+
+
+func _on_button_7_pressed() -> void:
+	if clicky >= 20000 and not blobcat4_bought:
+		clicky -= 20000
+		blobcat4_animation.play("entry")
+		random_meow()
+		blobcat4_bought = true
+		blobcat_amount += 2
+
+
+func _on_button_7_mouse_entered() -> void:
+	button7.text = "COST: 200 0 0 feed"
+func _on_button_7_mouse_exited() -> void:
+	button7.text = "Blob cat 4"
