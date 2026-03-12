@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ugwnfjxmqbje"]
+
+[ext_resource type="Script" uid="uid://d2vtmtsyo8ahr" path="res://gpu_particles_2d.gd" id="1_2j51h"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ah5qx"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 1
+emission_sphere_radius = 5.74
+angle_min = -720.0
+angle_max = 720.0
+initial_velocity_max = 55.55
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 3.0
+color = Color(1, 0.5686275, 1, 1)
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+anim_speed_max = 16.0
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+position = Vector2(1, 0)
+amount = 200
+lifetime = 0.5
+randomness = 1.0
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_ah5qx")
+script = ExtResource("1_2j51h")

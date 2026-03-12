@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=52 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cknrriclnvyiv" path="res://assets/646849__konstati__crunch_munch.wav" id="10_6wevv"]
 [ext_resource type="Texture2D" uid="uid://d3nbwwha1lb4n" path="res://assets/blobcat3.png" id="11_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://bmsl220sxaj3" path="res://assets/blobcat4.png" id="12_mngbo"]
+[ext_resource type="PackedScene" uid="uid://ugwnfjxmqbje" path="res://gpu_particles_2d.tscn" id="13_4w45t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
 bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
@@ -533,6 +534,21 @@ _data = {
 &"game_end": SubResource("Animation_01n6w")
 }
 
+[sub_resource type="Animation" id="Animation_7nt27"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("blobcat3_:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-473, 683)]
+}
+
 [sub_resource type="Animation" id="Animation_bcnxi"]
 resource_name = "entry"
 length = 6.0
@@ -547,21 +563,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-473, 683), Vector2(-18, 536), Vector2(-18, 536), Vector2(31, 613), Vector2(127, 612), Vector2(127, 612), Vector2(95, 650), Vector2(192, 659)]
-}
-
-[sub_resource type="Animation" id="Animation_7nt27"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("blobcat3_:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-473, 683)]
 }
 
 [sub_resource type="Animation" id="Animation_k6f3i"]
@@ -591,6 +592,21 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6f3i"]
 size = Vector2(131.5, 152)
 
+[sub_resource type="Animation" id="Animation_adb74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-344, 866)]
+}
+
 [sub_resource type="Animation" id="Animation_xdqt8"]
 resource_name = "entry"
 length = 6.0
@@ -605,21 +621,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(-344, 866), Vector2(-148, 728), Vector2(-148, 728), Vector2(-179, 699), Vector2(-29, 743), Vector2(52, 703), Vector2(54, 647), Vector2(54, 647)]
-}
-
-[sub_resource type="Animation" id="Animation_adb74"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-344, 866)]
 }
 
 [sub_resource type="Animation" id="Animation_58gk3"]
@@ -922,6 +923,8 @@ theme = ExtResource("1_w2twt")
 text = "game end: you went too broke  :3 "
 visible_characters = 0
 visible_ratio = 0.0
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("13_4w45t")]
 
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]

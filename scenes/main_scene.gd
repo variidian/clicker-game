@@ -91,12 +91,14 @@ func _on_button_pressed() -> void: #button1 (purchase)
 	if clicky >= 10:
 		additional_clicks += 1
 		clicky -= 10
+		click.play()
 
 
 func _on_button_2_pressed() -> void: #button2 (purchase)
 	if clicky >= 99:
 		additional_clicks += 10
 		clicky -= 99
+		click.play()
 
 
 func _on_button_3_pressed() -> void: #blob cat (purchase)
@@ -108,6 +110,7 @@ func _on_button_3_pressed() -> void: #blob cat (purchase)
 		random_meow()
 		blobcat1_bought = true
 		blobcat_amount += 1
+		click.play()
 
 func random_meow():
 	var random_float = randf()
@@ -162,6 +165,7 @@ func _on_button_4_pressed() -> void:          #blobcat purchase
 		random_meow()
 		blobcat2_bought = true
 		blobcat_amount += 2
+		click.play()
 
 
 func _on_blobcat_2_animation_animation_finished(anim_name: StringName) -> void:
@@ -201,6 +205,7 @@ func _on_button_5_pressed() -> void:
 		if clicky >= 999:
 			additional_clicks += 100
 			clicky -= 999
+			click.play()
 
 func _on_button_5_mouse_entered() -> void:
 	button5.text = "COST: 999 feed"
@@ -215,6 +220,7 @@ func _on_button_6_pressed() -> void:
 		random_meow()
 		blobcat3_bought = true
 		blobcat_amount += 2
+		click.play()
 
 func _on_button_6_mouse_entered() -> void:
 	button6.text = "COST: 150 0 0 feed"
@@ -236,6 +242,7 @@ func _on_button_7_pressed() -> void:
 		random_meow()
 		blobcat4_bought = true
 		blobcat_amount += 2
+		click.play()
 
 
 func _on_button_7_mouse_entered() -> void:
