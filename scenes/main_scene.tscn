@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://1dv6ilarv55s"]
+[gd_scene load_steps=54 format=3 uid="uid://1dv6ilarv55s"]
 
 [ext_resource type="Script" uid="uid://ih4sb51jg2l2" path="res://scenes/main_scene.gd" id="1_pw63i"]
 [ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_w2twt"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d3nbwwha1lb4n" path="res://assets/blobcat3.png" id="11_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://bmsl220sxaj3" path="res://assets/blobcat4.png" id="12_mngbo"]
 [ext_resource type="PackedScene" uid="uid://ugwnfjxmqbje" path="res://gpu_particles_2d.tscn" id="13_4w45t"]
+[ext_resource type="PackedScene" uid="uid://ds87hm0j1p3a6" path="res://audio_stream_player_2d.tscn" id="14_r6p65"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pw63i"]
 bg_color = Color(0.9607843, 0.93333334, 0.7764706, 1)
@@ -155,6 +156,9 @@ _data = {
 &"catfeed": SubResource("Animation_rt2n2")
 }
 
+[sub_resource type="Animation" id="Animation_to7gp"]
+resource_name = "RESET"
+
 [sub_resource type="Animation" id="Animation_c16ls"]
 resource_name = "blobcat2_entry"
 length = 5.0
@@ -190,6 +194,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6wevv"]
 _data = {
+&"RESET": SubResource("Animation_to7gp"),
 &"blobcat2_entry": SubResource("Animation_c16ls"),
 &"blobcat2_move": SubResource("Animation_c1pb6")
 }
@@ -676,18 +681,48 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_pu3yx")
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 offset_left = 859.0
 offset_top = 16.0
-offset_right = 1140.0
+offset_right = 1150.0
 offset_bottom = 639.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+
+[node name="RichTextLabel" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_w2twt")
+text = "temu factory"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="autoclick_purchase" type="Button" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(280, 50)
 layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("1_w2twt")
-text = "+1/sec auto click"
+text = "+1/sec factory"
+
+[node name="button11" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+10 /sec factory"
+
+[node name="button12" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+10 0 /sec factory"
+
+[node name="RichTextLabel2" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_w2twt")
+text = "manual labor"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button" type="Button" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(280, 50)
@@ -709,6 +744,28 @@ layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("1_w2twt")
 text = "+10 0  feed/click"
+
+[node name="Button9" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+10 0 0  feed/click"
+
+[node name="Button10" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "+10 0 0 0  feed/click"
+
+[node name="RichTextLabel3" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_w2twt")
+text = "blob cats"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Button3" type="Button" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(280, 50)
@@ -737,6 +794,21 @@ layout_mode = 2
 size_flags_vertical = 2
 theme = ExtResource("1_w2twt")
 text = "Blob cat 4"
+
+[node name="RichTextLabel4" type="Label" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("1_w2twt")
+text = "Prestige"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button8" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(280, 50)
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("1_w2twt")
+text = "PRESTIGE!!"
 
 [node name="Label" type="Label" parent="."]
 offset_left = 4.0
@@ -926,9 +998,17 @@ visible_ratio = 0.0
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("13_4w45t")]
 
+[node name="AudioStreamPlayer2D" parent="." instance=ExtResource("14_r6p65")]
+
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/autoclick_purchase" to="." method="_on_autoclick_purchase_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/button11" to="." method="_on_button_11_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/button11" to="." method="_on_button_11_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/button11" to="." method="_on_button_11_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/button12" to="." method="_on_button_12_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/button12" to="." method="_on_button_12_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/button12" to="." method="_on_button_12_pressed"]
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
@@ -938,6 +1018,12 @@ visible_ratio = 0.0
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button5" to="." method="_on_button_5_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button5" to="." method="_on_button_5_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button9" to="." method="_on_button_9_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button9" to="." method="_on_button_9_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button9" to="." method="_on_button_9_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button10" to="." method="_on_button_10_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button10" to="." method="_on_button_10_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button10" to="." method="_on_button_10_pressed"]
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
@@ -950,6 +1036,9 @@ visible_ratio = 0.0
 [connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button7" to="." method="_on_button_7_mouse_entered"]
 [connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button7" to="." method="_on_button_7_mouse_exited"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="mouse_entered" from="ScrollContainer/VBoxContainer/Button8" to="." method="_on_button_8_mouse_entered"]
+[connection signal="mouse_exited" from="ScrollContainer/VBoxContainer/Button8" to="." method="_on_button_8_mouse_exited"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Button8" to="." method="_on_button_8_pressed"]
 [connection signal="mouse_entered" from="blobcat1/meow2d" to="." method="_on_meow_2d_mouse_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

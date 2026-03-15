@@ -42,7 +42,13 @@ extends Node2D
 @onready var button6 = $ScrollContainer/VBoxContainer/Button6
 @onready var blobcat4_animation = $blobcat4
 @onready var button7 = $ScrollContainer/VBoxContainer/Button7
-
+@onready var button8 = $ScrollContainer/VBoxContainer/Button8
+@onready var prestige_multiplier = 1
+@onready var button9 = $ScrollContainer/VBoxContainer/Button9
+@onready var button10 = $ScrollContainer/VBoxContainer/Button10
+@onready var button11 = $ScrollContainer/VBoxContainer/button11
+@onready var button12 = $ScrollContainer/VBoxContainer/button12
+@onready var dialogue = preload("res://start.dialogue")
 func _ready():
 	feeding_text.hide()
 	frenzy_sprite.hide()
@@ -50,19 +56,22 @@ func _ready():
 	eating_label.hide()
 	game_end_bg.hide()
 	game_end_text.hide()
+	DialogueManager.show_dialogue_balloon(dialogue, "start")
+	yap.play()
+	yap.stream_paused = false
 func _on_button_mouse_entered() -> void: #show price on hover
-	button.text = 'COST: 10  feed'
+	button.text = 'COST: 10'
 func _on_button_mouse_exited() -> void:  #remove price after hover
 	button.text = '+1 feed/click'
 	
 func _on_button_2_mouse_entered() -> void: 
-	button2.text = 'COST: 99  feed'
+	button2.text = 'COST: 99'
 func _on_button_2_mouse_exited() -> void:
 	button2.text = '+10  feed/click'
 
 func _on_button_3_mouse_entered() -> void:
 	if not blobcat1_bought:
-		button3.text = "COST: 50 0 0  feed"
+		button3.text = "COST: 50 0 0"
 	else:
 		button3.text = "BOUGHT"
 func _on_button_3_mouse_exited() -> void:
@@ -72,7 +81,7 @@ func _process(delta: float) -> void:
 	cat_feed_count.text = "CAT FEED: " + str(clicky)
 	if can_click:
 		if Input.is_action_just_pressed("click"): 
-			clicky += (int(1) + int(additional_clicks)) * frenzy_multiplier
+			clicky += (int(1) + int(additional_clicks)) * frenzy_multiplier * prestige_multiplier
 			catfeed_animation.play("catfeed")
 			click.play()
 			chance_for_frenzy()
@@ -153,7 +162,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_button_4_mouse_entered() -> void:
 	if not blobcat2_bought:
-			button4.text = "COST: 9999  feed"
+			button4.text = "COST: 9999"
 	else:
 		button4.text = "BOUGHT"
 func _on_button_4_mouse_exited() -> void:
@@ -182,9 +191,9 @@ func _on_autoclick_purchase_pressed() -> void:
 		autoclicker += 1
 
 func _on_autoclick_purchase_mouse_entered() -> void:
-	autoclick.text = "COST: 99  feed"
+	autoclick.text = "COST: 99"
 func _on_autoclick_purchase_mouse_exited() -> void:
-	autoclick.text = "+1/sec auto click"
+	autoclick.text = "+1/sec factory"
 
 func _on_autoclick_timer_timeout() -> void:
 	clicky += autoclicker
@@ -208,7 +217,7 @@ func _on_button_5_pressed() -> void:
 			click.play()
 
 func _on_button_5_mouse_entered() -> void:
-	button5.text = "COST: 999 feed"
+	button5.text = "COST: 999"
 func _on_button_5_mouse_exited() -> void:
 	button5.text = "+10 0  feed/click"
 
@@ -223,7 +232,7 @@ func _on_button_6_pressed() -> void:
 		click.play()
 
 func _on_button_6_mouse_entered() -> void:
-	button6.text = "COST: 150 0 0 feed"
+	button6.text = "COST: 150 0 0 "
 
 
 func _on_button_6_mouse_exited() -> void:
@@ -246,6 +255,84 @@ func _on_button_7_pressed() -> void:
 
 
 func _on_button_7_mouse_entered() -> void:
-	button7.text = "COST: 200 0 0 feed"
+	button7.text = "COST: 20 0 0 0"
 func _on_button_7_mouse_exited() -> void:
 	button7.text = "Blob cat 4"
+
+
+func _on_button_8_pressed() -> void: #PRESTIGE
+	if clicky >= 1000000:
+		clicky -= 1000000
+		reset_everything()
+func _on_button_8_mouse_entered() -> void:
+	button8.text = "COST: 10 0 0 0 0 0"
+func _on_button_8_mouse_exited() -> void:
+	button8.text = "PRESTIGE!!"
+	
+func reset_everything():
+	animation.play("RESET")
+	blobcat2_animation.play("RESET")
+	blobcat3_animation.play("RESET")
+	blobcat4_animation.play("RESET")
+	blobcat1_bought = false
+	blobcat2_bought = false
+	blobcat3_bought = false
+	blobcat4_bought = false
+	blobcat_amount = 0
+	clicky = 0
+	prestige_multiplier += 0.1
+	additional_clicks = 0
+	
+
+
+func _on_button_9_mouse_entered() -> void:
+	button9.text = "COST: 10 0 0 0"
+func _on_button_9_mouse_exited() -> void:
+	button9.text = "+ 10 0 0 feed/click"
+func _on_button_9_pressed() -> void:
+	if clicky >= 10000:
+		clicky -= 10000
+		additional_clicks += 1000
+		click.play
+
+func _on_button_10_pressed() -> void:
+	if clicky >= 100000:
+		clicky -= 100000
+		additional_clicks += 10000
+		click.play
+
+func _on_button_10_mouse_entered() -> void:
+	button10.text = "COST: 10 0 0 0 0"
+
+
+func _on_button_10_mouse_exited() -> void:
+	button10.text = "+ 10 0 0 0 feed/click"
+
+
+func _on_button_11_pressed() -> void:
+	click.play()
+	if clicky >= 1000:
+		clicky -= 1000
+		if autoclicker == 0:
+			autoclick_timer.start()
+		autoclicker += 10
+
+func _on_button_11_mouse_entered() -> void:
+	button11.text = "COST: 10 0 0"
+func _on_button_11_mouse_exited() -> void:
+	button11.text = "+10 /sec factory"
+
+
+func _on_button_12_pressed() -> void:
+	click.play()
+	if clicky >= 10000:
+		clicky -= 10000
+		if autoclicker == 0:
+			autoclick_timer.start()
+		autoclicker += 100
+
+
+func _on_button_12_mouse_entered() -> void:
+	button12.text = "COST: 10 0 0 0"
+func _on_button_12_mouse_exited() -> void:
+	button12.text = "+10 0 /sec factory"

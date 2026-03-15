@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds87hm0j1p3a6"]
+
+[ext_resource type="AudioStream" uid="uid://po3kctmiiqh7" path="res://artificiallyinspired-alien-high-pitch-312010.mp3" id="1_d2dya"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_d2dya")
+parameters/looping = true
