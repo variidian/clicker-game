@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq64thahq065w"]
+
+[ext_resource type="Theme" uid="uid://bodvmfg5g7y4n" path="res://assets/theme.tres" id="1_45vjg"]
+[ext_resource type="Script" uid="uid://cv1hfh86dxse2" path="res://pause.gd" id="1_aq7p1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eylr0"]
+bg_color = Color(0.10060672, 0.47708273, 0.7220346, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.040580124, 0.29934114, 0.4646864, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="Control" type="Control"]
+z_index = 999
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aq7p1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 999
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_left = 350.0
+offset_top = 41.0
+offset_right = 794.0
+offset_bottom = 614.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eylr0")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 431.0
+offset_top = 94.0
+offset_right = 710.0
+offset_bottom = 141.0
+theme = ExtResource("1_45vjg")
+theme_override_colors/font_color = Color(0.9607843, 0.93333334, 0.70980394, 1)
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 391.0
+offset_top = 230.0
+offset_right = 753.0
+offset_bottom = 290.0
+theme = ExtResource("1_45vjg")
+text = "UNPAUSE"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 390.0
+offset_top = 325.0
+offset_right = 752.0
+offset_bottom = 385.0
+theme = ExtResource("1_45vjg")
+text = "exit"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]

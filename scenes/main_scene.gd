@@ -49,6 +49,7 @@ extends Node2D
 @onready var button11 = $ScrollContainer/VBoxContainer/button11
 @onready var button12 = $ScrollContainer/VBoxContainer/button12
 @onready var dialogue = preload("res://start.dialogue")
+@onready var pause_menu = preload("res://pause.tscn")
 func _ready():
 	feeding_text.hide()
 	frenzy_sprite.hide()
@@ -93,8 +94,9 @@ func _process(delta: float) -> void:
 		game_end_bg.show()
 		game_end_text.show()
 		game_ended = true
-
-
+	if Input.is_action_just_pressed("esc"):
+		var pausemenu_instance = pause_menu.instantiate()
+		add_child(pausemenu_instance)
 
 func _on_button_pressed() -> void: #button1 (purchase)
 	if clicky >= 10:
