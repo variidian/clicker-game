@@ -50,16 +50,20 @@ extends Node2D
 @onready var button12 = $ScrollContainer/VBoxContainer/button12
 @onready var dialogue = preload("res://start.dialogue")
 @onready var pause_menu = preload("res://pause.tscn")
+@onready var starting_dialogue
 func _ready():
+	load_game()
 	feeding_text.hide()
 	frenzy_sprite.hide()
 	frenzy_sprite2.hide()
 	eating_label.hide()
 	game_end_bg.hide()
 	game_end_text.hide()
-	DialogueManager.show_dialogue_balloon(dialogue, "start")
-	yap.play()
-	yap.stream_paused = false
+	if not starting_dialogue:
+		DialogueManager.show_dialogue_balloon(dialogue, "start")
+		yap.play()
+		yap.stream_paused = false
+		starting_dialogue = true
 func _on_button_mouse_entered() -> void: #show price on hover
 	button.text = 'COST: 10'
 func _on_button_mouse_exited() -> void:  #remove price after hover
@@ -94,7 +98,10 @@ func _process(delta: float) -> void:
 		game_end_bg.show()
 		game_end_text.show()
 		game_ended = true
+		if FileAccess.file_exists("user://savegame.save"):
+			DirAccess.remove_absolute("user://savegame.save")
 	if Input.is_action_just_pressed("esc"):
+		save_game()
 		var pausemenu_instance = pause_menu.instantiate()
 		add_child(pausemenu_instance)
 
@@ -124,8 +131,8 @@ func _on_button_3_pressed() -> void: #blob cat (purchase)
 		click.play()
 
 func random_meow():
-	var random_float = randf()
 	randomize()
+	var random_float = randf()
 	if random_float <= 0.32:
 		meow.play()
 	if random_float >= 0.33 and random_float <= 0.66:
@@ -133,8 +140,8 @@ func random_meow():
 	if random_float >= 0.67:
 		meow2.play()
 func chance_for_frenzy():
-	var random_float = randf()
 	randomize()
+	var random_float = randf()
 	if random_float <= 0.01:
 		do_frenzy()
 		in_frenzy = true
@@ -295,13 +302,13 @@ func _on_button_9_pressed() -> void:
 	if clicky >= 10000:
 		clicky -= 10000
 		additional_clicks += 1000
-		click.play
+		click.play()
 
 func _on_button_10_pressed() -> void:
 	if clicky >= 100000:
 		clicky -= 100000
 		additional_clicks += 10000
-		click.play
+		click.play()
 
 func _on_button_10_mouse_entered() -> void:
 	button10.text = "COST: 10 0 0 0 0"
@@ -338,3 +345,69 @@ func _on_button_12_mouse_entered() -> void:
 	button12.text = "COST: 10 0 0 0"
 func _on_button_12_mouse_exited() -> void:
 	button12.text = "+10 0 /sec factory"
+
+func save_game():
+	var save_data = {
+		"clicky": clicky,
+		"additional_clicks": additional_clicks,
+		"blobcat1": blobcat1_bought,
+		"blobcat2": blobcat2_bought,
+		"blobcat3": blobcat3_bought,
+		"blobcat4": blobcat4_bought,
+		"blobcat_amount": blobcat_amount,
+		"prestige_multiplier": prestige_multiplier,
+		"autoclicker": autoclicker,
+		"starting_dialogue" : starting_dialogue
+	}
+
+	var file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	file.store_string(JSON.stringify(save_data))
+func load_game():
+	if not FileAccess.file_exists("user://savegame.save"):
+		return
+
+	var file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var content = file.get_as_text()
+
+	var json = JSON.new()
+	if json.parse(content) != OK:
+		print("Failed to load save")
+		return
+
+	var data = json.data
+
+	clicky = data.get("clicky", 0)
+	additional_clicks = data.get("additional_clicks", 0)
+	blobcat1_bought = data.get("blobcat1", false)
+	blobcat2_bought = data.get("blobcat2", false)
+	blobcat3_bought = data.get("blobcat3", false)
+	blobcat4_bought = data.get("blobcat4", false)
+	blobcat_amount = data.get("blobcat_amount", 0)
+	prestige_multiplier = data.get("prestige_multiplier", 1)
+	autoclicker = data.get("autoclicker", 0)
+	starting_dialogue = data.get("starting_dialogue",false)
+	
+	# Blobcat 1
+	if blobcat1_bought:
+		animation.play("blobcat1_move")
+		feeding_text.show()
+
+# Blobcat 2
+	if blobcat2_bought:
+		blobcat2_animation.play("blobcat2_move")
+
+# Blobcat 3
+	if blobcat3_bought:
+		blobcat3_animation.play("loop")
+
+# Blobcat 4
+	if blobcat4_bought:
+		blobcat4_animation.play("loop")
+	
+	if autoclicker > 0:
+		autoclick_timer.start()
+	
+	if blobcat_amount > 0:
+		feeding_blobcat_timer.start()
+		started_feeding = true
+	

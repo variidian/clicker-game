@@ -655,7 +655,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4w45t"]
 size = Vector2(190, 180.5)
 
-[node name="main_scene" type="Node2D"]
+[node name="main_scene" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_pw63i")
 
 [node name="bg" type="Panel" parent="."]

@@ -9,3 +9,8 @@ func _on_button_pressed() -> void: #unpause
 
 func _on_button_2_pressed() -> void:
 	get_tree().quit()
+
+func _on_button_3_pressed() -> void:
+	if FileAccess.file_exists("user://savegame.save"):
+		DirAccess.remove_absolute("user://savegame.save")
+	get_tree().quit()

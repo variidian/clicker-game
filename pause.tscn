@@ -62,7 +62,17 @@ offset_top = 325.0
 offset_right = 752.0
 offset_bottom = 385.0
 theme = ExtResource("1_45vjg")
-text = "exit"
+text = "Quit AND SAVE"
+
+[node name="Button3" type="Button" parent="CanvasLayer"]
+process_mode = 3
+offset_left = 388.0
+offset_top = 422.0
+offset_right = 750.0
+offset_bottom = 482.0
+theme = ExtResource("1_45vjg")
+text = "Quit AND Clear Data"
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button3" to="." method="_on_button_3_pressed"]
