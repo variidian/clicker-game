@@ -72,6 +72,8 @@ var _is_awaiting_mutation: bool = false
 
 
 func _process(delta: float) -> void:
+	if not _is_typing:
+		yap.stream_paused = true
 	if _is_typing:
 		# Type out text
 		yap.stream_paused = false
@@ -86,7 +88,7 @@ func _process(delta: float) -> void:
 			# Make sure any mutations at the end of the line get run
 			_mutate_inline_mutations(get_total_character_count())
 			is_typing = false
-			yap.stream_paused = true
+			
 
 
 ## Sets the label's text from the current dialogue line. Override if you want

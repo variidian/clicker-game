@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cgsac572x7ftu"
+path="res://.godot/imported/stop.dialogue-b1b9c12d4865b1eb78de255a6b58999e.tres"
+
+[deps]
+
+source_file="res://stop.dialogue"
+dest_files=["res://.godot/imported/stop.dialogue-b1b9c12d4865b1eb78de255a6b58999e.tres"]
+
+[params]
+
+defaults=true

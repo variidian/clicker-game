@@ -31,7 +31,6 @@ extends Node2D
 @onready var eating_label = $eating_label
 @onready var eating_animation = $eating
 @onready var game_end_animation = $game_end
-@onready var game_end_text = $game_end_text
 @onready var game_end_bg = $game_end_bg
 @onready var game_ended := false
 @onready var button5 = $ScrollContainer/VBoxContainer/Button5
@@ -51,6 +50,11 @@ extends Node2D
 @onready var dialogue = preload("res://start.dialogue")
 @onready var pause_menu = preload("res://pause.tscn")
 @onready var starting_dialogue
+@onready var end = preload("res://end.dialogue")
+@onready var careful = preload("res://careful.dialogue")
+@onready var stop = preload("res://stop.dialogue")
+func _stop():
+	DialogueManager.show_dialogue_balloon(stop, "start")
 func _ready():
 	load_game()
 	feeding_text.hide()
@@ -58,7 +62,6 @@ func _ready():
 	frenzy_sprite2.hide()
 	eating_label.hide()
 	game_end_bg.hide()
-	game_end_text.hide()
 	if not starting_dialogue:
 		DialogueManager.show_dialogue_balloon(dialogue, "start")
 		yap.play()
@@ -90,13 +93,14 @@ func _process(delta: float) -> void:
 			catfeed_animation.play("catfeed")
 			click.play()
 			chance_for_frenzy()
+			be_careful()
 	if blobcat_amount >= 1 and not started_feeding:
 		started_feeding = true
 		feeding_blobcat_timer.start()
 	if not game_ended and clicky <= -10000:
 		game_end_animation.play("game_end")
 		game_end_bg.show()
-		game_end_text.show()
+		DialogueManager.show_dialogue_balloon(end, "start")
 		game_ended = true
 		if FileAccess.file_exists("user://savegame.save"):
 			DirAccess.remove_absolute("user://savegame.save")
@@ -110,6 +114,8 @@ func _on_button_pressed() -> void: #button1 (purchase)
 		additional_clicks += 1
 		clicky -= 10
 		click.play()
+	else:
+		_stop()
 
 
 func _on_button_2_pressed() -> void: #button2 (purchase)
@@ -117,6 +123,8 @@ func _on_button_2_pressed() -> void: #button2 (purchase)
 		additional_clicks += 10
 		clicky -= 99
 		click.play()
+	else:
+		_stop()
 
 
 func _on_button_3_pressed() -> void: #blob cat (purchase)
@@ -129,6 +137,8 @@ func _on_button_3_pressed() -> void: #blob cat (purchase)
 		blobcat1_bought = true
 		blobcat_amount += 1
 		click.play()
+	elif clicky < 5000: 
+		_stop()
 
 func random_meow():
 	randomize()
@@ -145,6 +155,11 @@ func chance_for_frenzy():
 	if random_float <= 0.01:
 		do_frenzy()
 		in_frenzy = true
+func be_careful():
+	randomize()
+	var random_float = randf()
+	if random_float <= 0.01:
+		DialogueManager.show_dialogue_balloon(careful, "start")
 func do_frenzy():
 	frenzy_anim.play("frenzy")
 	frenzy_multiplier = 2
@@ -184,6 +199,8 @@ func _on_button_4_pressed() -> void:          #blobcat purchase
 		blobcat2_bought = true
 		blobcat_amount += 2
 		click.play()
+	elif clicky < 9999:
+		_stop()
 
 
 func _on_blobcat_2_animation_animation_finished(anim_name: StringName) -> void:
@@ -198,6 +215,8 @@ func _on_autoclick_purchase_pressed() -> void:
 			autoclick_timer.start()
 		clicky -= 99
 		autoclicker += 1
+	else:
+		_stop()
 
 func _on_autoclick_purchase_mouse_entered() -> void:
 	autoclick.text = "COST: 99"
@@ -224,6 +243,8 @@ func _on_button_5_pressed() -> void:
 			additional_clicks += 100
 			clicky -= 999
 			click.play()
+		else:
+			_stop()
 
 func _on_button_5_mouse_entered() -> void:
 	button5.text = "COST: 999"
@@ -239,6 +260,8 @@ func _on_button_6_pressed() -> void:
 		blobcat3_bought = true
 		blobcat_amount += 2
 		click.play()
+	elif clicky < 15000:
+		_stop()
 
 func _on_button_6_mouse_entered() -> void:
 	button6.text = "COST: 150 0 0 "
@@ -261,6 +284,8 @@ func _on_button_7_pressed() -> void:
 		blobcat4_bought = true
 		blobcat_amount += 2
 		click.play()
+	elif clicky < 20000:
+		_stop()
 
 
 func _on_button_7_mouse_entered() -> void:
@@ -273,6 +298,8 @@ func _on_button_8_pressed() -> void: #PRESTIGE
 	if clicky >= 1000000:
 		clicky -= 1000000
 		reset_everything()
+	else:
+		_stop()
 func _on_button_8_mouse_entered() -> void:
 	button8.text = "COST: 10 0 0 0 0 0"
 func _on_button_8_mouse_exited() -> void:
@@ -303,12 +330,16 @@ func _on_button_9_pressed() -> void:
 		clicky -= 10000
 		additional_clicks += 1000
 		click.play()
+	else:
+		_stop()
 
 func _on_button_10_pressed() -> void:
 	if clicky >= 100000:
 		clicky -= 100000
 		additional_clicks += 10000
 		click.play()
+	else:
+		_stop()
 
 func _on_button_10_mouse_entered() -> void:
 	button10.text = "COST: 10 0 0 0 0"
@@ -325,6 +356,8 @@ func _on_button_11_pressed() -> void:
 		if autoclicker == 0:
 			autoclick_timer.start()
 		autoclicker += 10
+	else:
+		_stop()
 
 func _on_button_11_mouse_entered() -> void:
 	button11.text = "COST: 10 0 0"
@@ -339,6 +372,8 @@ func _on_button_12_pressed() -> void:
 		if autoclicker == 0:
 			autoclick_timer.start()
 		autoclicker += 100
+	else:
+		_stop()
 
 
 func _on_button_12_mouse_entered() -> void:

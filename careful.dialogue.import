@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bgjioqulh1vox"
+path="res://.godot/imported/careful.dialogue-7e21c72217be03343634e1ef3adc2248.tres"
+
+[deps]
+
+source_file="res://careful.dialogue"
+dest_files=["res://.godot/imported/careful.dialogue-7e21c72217be03343634e1ef3adc2248.tres"]
+
+[params]
+
+defaults=true
