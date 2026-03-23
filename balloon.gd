@@ -1,4 +1,5 @@
 extends CanvasLayer
+@onready var anim = $AnimationPlayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
 
@@ -215,3 +216,8 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 
 
 #endregion
+
+
+
+func _on_area_2d_mouse_entered() -> void:
+	anim.play("bop")

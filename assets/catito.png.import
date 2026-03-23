@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkqv5mmp0ataj"
-path="res://.godot/imported/icon.jpg-64f68b30ea939aa8019167e67dffb2db.ctex"
+uid="uid://cr6jepy47h1y4"
+path="res://.godot/imported/catito.png-00e63aa500fcc7c2fa2d991652efb957.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/icon.jpg"
-dest_files=["res://.godot/imported/icon.jpg-64f68b30ea939aa8019167e67dffb2db.ctex"]
+source_file="res://assets/catito.png"
+dest_files=["res://.godot/imported/catito.png-00e63aa500fcc7c2fa2d991652efb957.ctex"]
 
 [params]
 

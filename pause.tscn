@@ -16,6 +16,7 @@ corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
 
 [node name="Control" type="Control"]
+process_mode = 3
 z_index = 999
 layout_mode = 3
 anchors_preset = 15
@@ -26,6 +27,7 @@ grow_vertical = 2
 script = ExtResource("1_aq7p1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 999
 
 [node name="Panel" type="Panel" parent="CanvasLayer"]
